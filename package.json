@@ -13,7 +13,7 @@
   "keywords": [
     "apache"
   ],
-  "author": "Tom Mount",
+  "author": "Tom Mount <tmountjr@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/tmountjr/apache-provision/issues"
