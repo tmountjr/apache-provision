@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/tmountjr/apache-provision",
   "devDependencies": {
+    "mock-fs": "^3.5.0",
     "nodeunit": "^0.9.1"
   },
   "dependencies": {
