@@ -1,22 +1,29 @@
 {
-  "name": "tmountjr-apache-provision",
+  "name": "apache-provision",
   "version": "0.1.0",
   "description": "Streamlines the provisioning process for a new apache subdomain",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/nodeunit/bin/nodeunit test"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/tmountjr/apache-provision.git"
   },
   "keywords": [
-    "apache"
+    "apache",
+    "virtualhost"
   ],
   "author": "Tom Mount <tmountjr@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/tmountjr/apache-provision/issues"
   },
-  "homepage": "https://github.com/tmountjr/apache-provision"
+  "homepage": "https://github.com/tmountjr/apache-provision",
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  }
 }
