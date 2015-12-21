@@ -3,6 +3,7 @@ var s = require('../lib/support.js'),
 	path = require('path'),
 	sitesBasePath = '/usr/local/sites-available',
 	confPath = '/etc/apache2/sites-available',
+	enabledConfPath = '/etc/apache2/sites-enabled',
 	flagsPath = '/usr/local/flags';
 
 module.exports = {
@@ -134,6 +135,27 @@ module.exports = {
 			mock.restore();
 			test.done();
 		},
+
+		testLink: function(test) {
+			var dirObject = {},
+				fs = require('fs'),
+				sourceConfFile = path.join(confPath, '20-bd58c8-test-project.conf'),
+				targetConfFile = path.join(enabledConfPath, '20-bd58c8-test-project.conf');
+
+			dirObject[sourceConfFile] = '';
+			dirObject[enabledConfPath] = {};
+
+			mock(dirObject);
+
+			test.doesNotThrow(function() {
+				s.template.link('test-project');
+				var foo = fs.lstatSync(targetConfFile);
+			});
+			test.ok(fs.lstatSync(targetConfFile).isSymbolicLink());
+
+			mock.restore();
+			test.done();
+		}
 	},
 
 	endToEnd: {
@@ -142,7 +164,7 @@ module.exports = {
 				rawTemplate = 'Subdomain at {{docroot}}/{{subdomain}}.',
 				dirObject = {};
 
-			dirObject[confPath] = dirObject[sitesBasePath] = dirObject[flagsPath] = {};
+			dirObject[confPath] = dirObject[sitesBasePath] = dirObject[flagsPath] =  dirObject[enabledConfPath] = {};
 
 			mock(dirObject);
 
