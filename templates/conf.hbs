@@ -9,9 +9,6 @@
   ServerName {{subdomain}}.tgm.dev
   DocumentRoot "{{docroot}}/{{subdomain}}"
 
-  # Enable PHP errors (TEST/DEV ENVIRONMENT ONLY).
-  php_flag display_errors on
-
   <Directory "{{docroot}}/{{subdomain}}">
     AllowOverride all
     Allow from all
@@ -25,9 +22,6 @@
 <VirtualHost *:443>
   ServerName {{subdomain}}.tgm.dev
   DocumentRoot "{{docroot}}/{{subdomain}}"
-
-  # Enable PHP errors (TEST/DEV ENVIRONMENT ONLY).
-  php_flag display_errors on
 
   <Directory "{{docroot}}/{{subdomain}}">
     AllowOverride all
