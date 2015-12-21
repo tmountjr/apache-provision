@@ -1,13 +1,43 @@
 # Generic configuration. Feel free to modify the finished product to suit your individual needs.
 
+<FilesMatch "\.php$">
+  Require all granted
+  SetHandler proxy:fcgi://127.0.0.1:9000
+</FilesMatch>
+
 <VirtualHost *:80>
   ServerName {{subdomain}}.tgm.dev
   DocumentRoot "{{docroot}}/{{subdomain}}"
+
+  # Enable PHP errors (TEST/DEV ENVIRONMENT ONLY).
+  php_flag display_errors on
+
+  <Directory "{{docroot}}/{{subdomain}}">
+    AllowOverride all
+    Allow from all
+    Order deny,allow
+  </Directory>
+
+  ErrorLog /home/vagrant/logs/{{subdomain}}-error.log
+  CustomLog /home/vagrant/logs/{{subdomain}}-access.log combined
 </VirtualHost>
 
 <VirtualHost *:443>
   ServerName {{subdomain}}.tgm.dev
   DocumentRoot "{{docroot}}/{{subdomain}}"
+
+  # Enable PHP errors (TEST/DEV ENVIRONMENT ONLY).
+  php_flag display_errors on
+
+  <Directory "{{docroot}}/{{subdomain}}">
+    AllowOverride all
+    Allow from all
+    Order deny,allow
+  </Directory>
+
+  ErrorLog /home/vagrant/logs/{{subdomain}}-ssl-error.log
+  CustomLog /home/vagrant/logs/{{subdomain}}-ssl-access.log combined
+
   SSLEngine on
   SSLCertificateFile      "/etc/ssl/certs/ssl-cert-snakeoil.pem"
   SSLCertificateKeyFile   "/etc/ssl/private/ssl-cert-snakeoil.key"
