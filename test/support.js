@@ -48,7 +48,7 @@ module.exports = {
 		},
 
 		testGetSerializedConfName: function(test) {
-			var expected = 'bd58c8-test-project.conf',
+			var expected = '20-bd58c8-test-project.conf',
 				input = 'test-project';
 
 			test.equal(expected, s.getSerializedConfName(input));
@@ -112,7 +112,7 @@ module.exports = {
 		testConfFileExists: function(test) {
 			var dirObject = {};
 
-			dirObject[confPath + '/bd58c8-test-project.conf'] = '';
+			dirObject[confPath + '/20-bd58c8-test-project.conf'] = '';
 			mock(dirObject);
 			test.ok(s.confFileExists('test-project'));
 			mock.restore();
