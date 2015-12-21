@@ -2,7 +2,7 @@ var s = require('../lib/support.js'),
 	mock = require('mock-fs'),
 	path = require('path'),
 	sitesBasePath = '/usr/local/sites-available',
-	confPath = '/etc/apache2/sites-available',
+	confPath = '/usr/local/sites-available',
 	enabledConfPath = '/etc/apache2/sites-enabled',
 	flagsPath = '/usr/local/flags';
 
