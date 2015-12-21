@@ -2,7 +2,8 @@ var s = require('../lib/support.js'),
 	mock = require('mock-fs'),
 	path = require('path'),
 	sitesBasePath = '/usr/local/sites-available',
-	confPath = '/etc/apache2/sites-available';;
+	confPath = '/etc/apache2/sites-available',
+	flagsPath = '/usr/local/flags';
 
 module.exports = {
 
@@ -54,6 +55,21 @@ module.exports = {
 			test.equal(expected, s.getSerializedConfName(input));
 			test.done();
 		},
+
+		testSetApacheDirtyFlag: function(test) {
+			var fs = require('fs'),
+				dirStructure = {};
+
+			dirStructure[flagsPath] = {};
+
+			mock(dirStructure);
+			test.doesNotThrow(function() {
+				s.setApacheDirtyFlag();
+				var foo = fs.statSync(flagsPath + '/apache-dirty');
+			});
+			mock.restore();
+			test.done();
+		}
 	},
 
 	usingBasePath: {
@@ -126,8 +142,7 @@ module.exports = {
 				rawTemplate = 'Subdomain at {{docroot}}/{{subdomain}}.',
 				dirObject = {};
 
-			dirObject[confPath] = {};
-			dirObject[sitesBasePath] = {};
+			dirObject[confPath] = dirObject[sitesBasePath] = dirObject[flagsPath] = {};
 
 			mock(dirObject);
 
